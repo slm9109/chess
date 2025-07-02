@@ -1,38 +1,49 @@
+// ChessMove.java
 package chess;
 
-/**
- * Represents moving a chess piece on a chessboard
- * <p>
- * Note: You can add to this class, but you may not alter
- * signature of the existing methods.
- */
+import java.util.Objects;
+
 public class ChessMove {
+    private final ChessPosition from;
+    private final ChessPosition to;
+    private final PieceType promotion;
 
-    public ChessMove(ChessPosition startPosition, ChessPosition endPosition,
-                     ChessPiece.PieceType promotionPiece) {
+    public ChessMove(ChessPosition from, ChessPosition to, PieceType promotion) {
+        this.from = from;
+        this.to = to;
+        this.promotion = promotion;
     }
 
-    /**
-     * @return ChessPosition of starting location
-     */
-    public ChessPosition getStartPosition() {
-        throw new RuntimeException("Not implemented");
+    public ChessMove(ChessPosition from, ChessPosition to) {
+        this(from, to, null);
     }
 
-    /**
-     * @return ChessPosition of ending location
-     */
-    public ChessPosition getEndPosition() {
-        throw new RuntimeException("Not implemented");
+    public ChessPosition getFrom() {
+        return from;
     }
 
-    /**
-     * Gets the type of piece to promote a pawn to if pawn promotion is part of this
-     * chess move
-     *
-     * @return Type of piece to promote a pawn to, or null if no promotion
-     */
-    public ChessPiece.PieceType getPromotionPiece() {
-        throw new RuntimeException("Not implemented");
+    public ChessPosition getTo() {
+        return to;
+    }
+
+    public PieceType getPromotion() {
+        return promotion;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ChessMove)) return false;
+        ChessMove move = (ChessMove) o;
+        return Objects.equals(from, move.from)
+                && Objects.equals(to, move.to)
+                && promotion == move.promotion;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(from, to, promotion);
     }
 }
+
+

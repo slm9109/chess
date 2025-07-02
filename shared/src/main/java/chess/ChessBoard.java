@@ -1,43 +1,54 @@
+// ChessBoard.java
 package chess;
 
-/**
- * A chessboard that can hold and rearrange chess pieces.
- * <p>
- * Note: You can add to this class, but you may not alter
- * signature of the existing methods.
- */
+import java.util.HashMap;
+import java.util.Map;
+
 public class ChessBoard {
+    private final Map<ChessPosition, ChessPiece> board = new HashMap<>();
 
-    public ChessBoard() {
-        
-    }
-
-    /**
-     * Adds a chess piece to the chessboard
-     *
-     * @param position where to add the piece to
-     * @param piece    the piece to add
-     */
-    public void addPiece(ChessPosition position, ChessPiece piece) {
-        throw new RuntimeException("Not implemented");
-    }
-
-    /**
-     * Gets a chess piece on the chessboard
-     *
-     * @param position The position to get the piece from
-     * @return Either the piece at the position, or null if no piece is at that
-     * position
-     */
-    public ChessPiece getPiece(ChessPosition position) {
-        throw new RuntimeException("Not implemented");
-    }
-
-    /**
-     * Sets the board to the default starting board
-     * (How the game of chess normally starts)
-     */
     public void resetBoard() {
-        throw new RuntimeException("Not implemented");
+        board.clear();
+        for (ChessPiece.Color col : ChessPiece.Color.values()) {
+            int pawnRow = (col == ChessPiece.Color.WHITE) ? 2 : 7;
+            int majorRow = (col == ChessPiece.Color.WHITE) ? 1 : 8;
+            for (int f = 1; f <= 8; f++) {
+                board.put(new ChessPosition(pawnRow, f), new ChessPiece(ChessPiece.PieceType.PAWN, col));
+            }
+            ChessPiece.Color c = col;
+            board.put(new ChessPosition(majorRow, 1), new ChessPiece(ChessPiece.PieceType.ROOK, c));
+            board.put(new ChessPosition(majorRow, 2), new ChessPiece(ChessPiece.PieceType.KNIGHT, c));
+            board.put(new ChessPosition(majorRow, 3), new ChessPiece(ChessPiece.PieceType.BISHOP, c));
+            board.put(new ChessPosition(majorRow, 4), new ChessPiece(ChessPiece.PieceType.QUEEN, c));
+            board.put(new ChessPosition(majorRow, 5), new ChessPiece(ChessPiece.PieceType.KING, c));
+            board.put(new ChessPosition(majorRow, 6), new ChessPiece(ChessPiece.PieceType.BISHOP, c));
+            board.put(new ChessPosition(majorRow, 7), new ChessPiece(ChessPiece.PieceType.KNIGHT, c));
+            board.put(new ChessPosition(majorRow, 8), new ChessPiece(ChessPiece.PieceType.ROOK, c));
+        }
+    }
+
+    public ChessPiece get(ChessPosition pos) {
+        return board.get(pos);
+    }
+
+    public void addPiece(ChessPosition pos, ChessPiece piece) {
+        board.put(pos, piece);
+    }
+
+    public void removePiece(ChessPosition pos) {
+        board.remove(pos);
+    }
+
+    public boolean isEmpty(ChessPosition pos) {
+        return !board.containsKey(pos);
+    }
+
+    public boolean hasEnemy(ChessPosition pos, ChessPiece.Color col) {
+        ChessPiece p = board.get(pos);
+        return p != null && p.getColor() != col;
+    }
+
+    public boolean isEmptyOrEnemy(ChessPosition pos, ChessPiece.Color col) {
+        return isEmpty(pos) || hasEnemy(pos, col);
     }
 }
