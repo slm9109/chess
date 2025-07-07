@@ -1,33 +1,29 @@
-// ChessMove.java
 package chess;
 
 import java.util.Objects;
 
 public class ChessMove {
-    private final ChessPosition from;
-    private final ChessPosition to;
-    private final PieceType promotion;
+    private final ChessPosition start;
+    private final ChessPosition end;
+    private final ChessPiece.PieceType promotionPiece;
 
-    public ChessMove(ChessPosition from, ChessPosition to, PieceType promotion) {
-        this.from = from;
-        this.to = to;
-        this.promotion = promotion;
+    public ChessMove(ChessPosition startPosition, ChessPosition endPosition,
+                     ChessPiece.PieceType promotionPiece) {
+        this.start = startPosition;
+        this.end = endPosition;
+        this.promotionPiece = promotionPiece;
     }
 
-    public ChessMove(ChessPosition from, ChessPosition to) {
-        this(from, to, null);
+    public ChessPosition getStartPosition() {
+        return start;
     }
 
-    public ChessPosition getFrom() {
-        return from;
+    public ChessPosition getEndPosition() {
+        return end;
     }
 
-    public ChessPosition getTo() {
-        return to;
-    }
-
-    public PieceType getPromotion() {
-        return promotion;
+    public ChessPiece.PieceType getPromotionPiece() {
+        return promotionPiece;
     }
 
     @Override
@@ -35,15 +31,14 @@ public class ChessMove {
         if (this == o) return true;
         if (!(o instanceof ChessMove)) return false;
         ChessMove move = (ChessMove) o;
-        return Objects.equals(from, move.from)
-                && Objects.equals(to, move.to)
-                && promotion == move.promotion;
+        return Objects.equals(start, move.start)
+                && Objects.equals(end, move.end)
+                && promotionPiece == move.promotionPiece;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(from, to, promotion);
+        return Objects.hash(start, end, promotionPiece);
     }
 }
-
 

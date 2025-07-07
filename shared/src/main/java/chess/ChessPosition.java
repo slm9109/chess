@@ -4,22 +4,19 @@ import java.util.Objects;
 
 public class ChessPosition {
     private final int row;
-    private final int col;
+    private final int column;
 
-    public ChessPosition(int row, int col) {
-        if (row < 1 || row > 8 || col < 1 || col > 8) {
-            throw new IllegalArgumentException("invalid position");
-        }
+    public ChessPosition(int row, int column) {
         this.row = row;
-        this.col = col;
+        this.column = column;
     }
 
     public int getRow() {
         return row;
     }
 
-    public int getCol() {
-        return col;
+    public int getColumn() {
+        return column;
     }
 
     @Override
@@ -27,11 +24,11 @@ public class ChessPosition {
         if (this == o) return true;
         if (!(o instanceof ChessPosition)) return false;
         ChessPosition that = (ChessPosition) o;
-        return row == that.row && col == that.col;
+        return row == that.row && column == that.column;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(row, col);
+        return Objects.hash(row, column);
     }
 }

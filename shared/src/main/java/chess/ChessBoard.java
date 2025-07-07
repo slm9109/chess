@@ -3,52 +3,57 @@ package chess;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ChessBoard {
-    private final Map<ChessPosition, ChessPiece> board = new HashMap<>();
+    private final Map<ChessPosition, ChessPiece> board;
+
+    public ChessBoard() {
+        board = new HashMap<>();
+    }
+
+    public void addPiece(ChessPosition position, ChessPiece piece) {
+        board.put(position, piece);
+    }
+
+    public void removePiece(ChessPosition position) {
+        board.remove(position);
+    }
+
+    public ChessPiece getPiece(ChessPosition position) {
+        return board.get(position);
+    }
+
+    public Map<ChessPosition, ChessPiece> getPieces() {
+        return board;
+    }
 
     public void resetBoard() {
         board.clear();
-        for (ChessPiece.Color col : ChessPiece.Color.values()) {
-            int pawnRow = (col == ChessPiece.Color.WHITE) ? 2 : 7;
-            int majorRow = (col == ChessPiece.Color.WHITE) ? 1 : 8;
-            for (int f = 1; f <= 8; f++) {
-                board.put(new ChessPosition(pawnRow, f), new ChessPiece(ChessPiece.PieceType.PAWN, col));
-            }
-            ChessPiece.Color c = col;
-            board.put(new ChessPosition(majorRow, 1), new ChessPiece(ChessPiece.PieceType.ROOK, c));
-            board.put(new ChessPosition(majorRow, 2), new ChessPiece(ChessPiece.PieceType.KNIGHT, c));
-            board.put(new ChessPosition(majorRow, 3), new ChessPiece(ChessPiece.PieceType.BISHOP, c));
-            board.put(new ChessPosition(majorRow, 4), new ChessPiece(ChessPiece.PieceType.QUEEN, c));
-            board.put(new ChessPosition(majorRow, 5), new ChessPiece(ChessPiece.PieceType.KING, c));
-            board.put(new ChessPosition(majorRow, 6), new ChessPiece(ChessPiece.PieceType.BISHOP, c));
-            board.put(new ChessPosition(majorRow, 7), new ChessPiece(ChessPiece.PieceType.KNIGHT, c));
-            board.put(new ChessPosition(majorRow, 8), new ChessPiece(ChessPiece.PieceType.ROOK, c));
+        // Add pawns
+        for (int i = 1; i <= 8; i++) {
+            addPiece(new ChessPosition(2, i), new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.TeamColor.WHITE));
+            addPiece(new ChessPosition(7, i), new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.TeamColor.BLACK));
         }
-    }
 
-    public ChessPiece get(ChessPosition pos) {
-        return board.get(pos);
-    }
+        // Add other white pieces
+        addPiece(new ChessPosition(1, 1), new ChessPiece(ChessPiece.PieceType.ROOK, ChessPiece.TeamColor.WHITE));
+        addPiece(new ChessPosition(1, 2), new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.TeamColor.WHITE));
+        addPiece(new ChessPosition(1, 3), new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.TeamColor.WHITE));
+        addPiece(new ChessPosition(1, 4), new ChessPiece(ChessPiece.PieceType.QUEEN, ChessPiece.TeamColor.WHITE));
+        addPiece(new ChessPosition(1, 5), new ChessPiece(ChessPiece.PieceType.KING, ChessPiece.TeamColor.WHITE));
+        addPiece(new ChessPosition(1, 6), new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.TeamColor.WHITE));
+        addPiece(new ChessPosition(1, 7), new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.TeamColor.WHITE));
+        addPiece(new ChessPosition(1, 8), new ChessPiece(ChessPiece.PieceType.ROOK, ChessPiece.TeamColor.WHITE));
 
-    public void addPiece(ChessPosition pos, ChessPiece piece) {
-        board.put(pos, piece);
-    }
-
-    public void removePiece(ChessPosition pos) {
-        board.remove(pos);
-    }
-
-    public boolean isEmpty(ChessPosition pos) {
-        return !board.containsKey(pos);
-    }
-
-    public boolean hasEnemy(ChessPosition pos, ChessPiece.Color col) {
-        ChessPiece p = board.get(pos);
-        return p != null && p.getColor() != col;
-    }
-
-    public boolean isEmptyOrEnemy(ChessPosition pos, ChessPiece.Color col) {
-        return isEmpty(pos) || hasEnemy(pos, col);
+        // Add other black pieces
+        addPiece(new ChessPosition(8, 1), new ChessPiece(ChessPiece.PieceType.ROOK, ChessPiece.TeamColor.BLACK));
+        addPiece(new ChessPosition(8, 2), new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.TeamColor.BLACK));
+        addPiece(new ChessPosition(8, 3), new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.TeamColor.BLACK));
+        addPiece(new ChessPosition(8, 4), new ChessPiece(ChessPiece.PieceType.QUEEN, ChessPiece.TeamColor.BLACK));
+        addPiece(new ChessPosition(8, 5), new ChessPiece(ChessPiece.PieceType.KING, ChessPiece.TeamColor.BLACK));
+        addPiece(new ChessPosition(8, 6), new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.TeamColor.BLACK));
+        addPiece(new ChessPosition(8, 7), new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.TeamColor.BLACK));
+        addPiece(new ChessPosition(8, 8), new ChessPiece(ChessPiece.PieceType.ROOK, ChessPiece.TeamColor.BLACK));
     }
 }
