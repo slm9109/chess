@@ -23,8 +23,8 @@ public class ChessPosition {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ChessPosition)) return false;
-        ChessPosition that = (ChessPosition) o;
-        return row == that.row && column == that.column;
+        ChessPosition p = (ChessPosition) o;
+        return row == p.row && column == p.column;
     }
 
     @Override
@@ -32,3 +32,4 @@ public class ChessPosition {
         return Objects.hash(row, column);
     }
 }
+
