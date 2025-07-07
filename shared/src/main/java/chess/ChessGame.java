@@ -15,3 +15,4 @@ public class ChessGame {
     public void setBoard(ChessBoard board) { throw new RuntimeException("Not implemented"); }
     public ChessBoard getBoard() { throw new RuntimeException("Not implemented"); }
 }
+

@@ -7,11 +7,10 @@ public class ChessMove {
     private final ChessPosition end;
     private final ChessPiece.PieceType promotion;
 
-    public ChessMove(ChessPosition startPosition, ChessPosition endPosition,
-                     ChessPiece.PieceType promotionPiece) {
-        this.start = startPosition;
-        this.end = endPosition;
-        this.promotion = promotionPiece;
+    public ChessMove(ChessPosition from, ChessPosition to, ChessPiece.PieceType promo) {
+        this.start = from;
+        this.end = to;
+        this.promotion = promo;
     }
 
     public ChessPosition getStartPosition() {
@@ -30,10 +29,10 @@ public class ChessMove {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ChessMove)) return false;
-        ChessMove m = (ChessMove) o;
-        return Objects.equals(start, m.start)
-                && Objects.equals(end, m.end)
-                && promotion == m.promotion;
+        ChessMove other = (ChessMove) o;
+        return Objects.equals(start, other.start)
+                && Objects.equals(end, other.end)
+                && promotion == other.promotion;
     }
 
     @Override
@@ -41,5 +40,7 @@ public class ChessMove {
         return Objects.hash(start, end, promotion);
     }
 }
+
+
 
 
