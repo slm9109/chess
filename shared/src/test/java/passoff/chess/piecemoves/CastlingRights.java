@@ -12,4 +12,4 @@ public class CastlingRights {
     public boolean blackKingRookMoved = false;
     public boolean blackQueenRookMoved = false;
 }
-{}
+.
