@@ -278,3 +278,5 @@ public class ChessGame {
         return res;
     }
 }
+/ /   m i n o r   c h a n g e  
+ 
