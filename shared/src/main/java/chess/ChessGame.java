@@ -278,6 +278,4 @@ public class ChessGame {
         return res;
     }
 }
-/ /   m i n o r   c h a n g e  
- / /   a n o t h e r   m i n o r   a d j u s t m e n t  
- 
+// Minor comment to force a new commit
