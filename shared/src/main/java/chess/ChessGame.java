@@ -278,3 +278,5 @@ public class ChessGame {
         return res;
     }
 }
+
+.
