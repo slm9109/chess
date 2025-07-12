@@ -13,4 +13,3 @@ public class EnPassantTracker {
     public ChessGame.TeamColor vulnerable = null;
 }
 
- */
