@@ -1,3 +1,9 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+# Mac system files
+.DS_Store
+._*
+
+# Windows Thumbs.db
+Thumbs.db
