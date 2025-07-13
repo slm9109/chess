@@ -137,3 +137,13 @@ public class ChessGame {
 
     public boolean isInStalemate(TeamColor teamColor) {
         if (isInCheck(teamColor)) return false;
+        for (int r = 1; r <= 8; r++) {
+            for (int c = 1; c <= 8; c++) {
+                ChessPosition p = new ChessPosition(r, c);
+                ChessPiece pce = board.getPiece(p);
+                if (pce != null && pce.getTeamColor() == teamColor) {
+                    Collection<ChessMove> moves = validMoves(p);
+                    if (moves != null && !moves.isEmpty()) return false;
+                }
+            }
+        }
