@@ -152,3 +152,14 @@ public class ChessGame {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ChessGame)) return false;
+        ChessGame g = (ChessGame) o;
+        return teamTurn == g.teamTurn && Objects.equals(board, g.board);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(board, teamTurn);
+    }
+}
