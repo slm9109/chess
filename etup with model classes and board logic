@@ -1,0 +1,11 @@
+[33m54f60ae[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m fix chess logic and cleanup removed test files
+[33m212cbf6[m Implement core chess logic and add tests
+[33m27be63b[m init project: add model interfaces and exceptions
+[33m5c0f068[m Implement basic ChessGame class
+[33m8a30af9[m Updated Main.java logic for client
+[33m62482cd[m Formatted ChessPosition
+[33m0dd75f0[m Phase 0: implemented updated chess logic
+[33m55d9e7a[m Phase0: implemented shared classes
+[33m6d28c27[m implement chess shared phase0
+[33mf2113f9[m added notes.md file
+[33m18f5b74[m Initial commit
