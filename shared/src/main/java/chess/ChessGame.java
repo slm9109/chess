@@ -147,3 +147,8 @@ public class ChessGame {
                 }
             }
         }
+        return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
