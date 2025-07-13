@@ -1,9 +1,30 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-# Mac system files
+
+# Ignore compiled class files
+*.class
+
+# Ignore build output folders
+/out/
+/target/
+/bin/
+
+# Ignore IntelliJ IDEA project files
+/.idea/
+/*.iml
+
+# Ignore OS system files (macOS & Windows)
 .DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
 ._*
 
-# Windows Thumbs.db
-Thumbs.db
+# Ignore logs and temp files
+*.log
+*.tmp
+*.temp
+
+# Ignore git metadata files accidentally included
+*.orig
