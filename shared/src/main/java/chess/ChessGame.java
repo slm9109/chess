@@ -59,4 +59,8 @@ public class ChessGame {
                 legal.add(move);
             }
         }
+        return legal;
+    }
 
+    public void makeMove(ChessMove move) throws InvalidMoveException {
+        // basic validations
