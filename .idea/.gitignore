@@ -28,3 +28,11 @@ Icon?
 
 # Ignore git metadata files accidentally included
 *.orig
+# OS junk files
+
+# IDE files
+.idea/
+*.iml
+
+# Maven build files
+target/
