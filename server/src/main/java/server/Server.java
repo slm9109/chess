@@ -1,38 +1,72 @@
 package server;
 
+import static spark.Spark.*;
 
+import dataaccess.InMemoryUserDAO;
+import dataaccess.InMemoryGameDAO;
+import dataaccess.InMemoryAuthDAO;
 
-import spark.*;
+import service.ClearService;
+import service.RegisterService;
+import service.LoginService;
+import service.GameService;
+
+import server.ClearHandler;
+import server.RegisterHandler;
+import server.LoginHandler;
+import server.LogoutHandler;
+import server.CreateGameHandler;
+import server.ListGamesHandler;
+import server.JoinGameHandler;
 
 public class Server {
+    public static void main(String[] args) {
+        new Server().run(8080);
+    }
 
-    public int run(int desiredPort) {
-        Spark.port(desiredPort);
+    public int run(int portNumber) {
+        port(portNumber);
+        staticFiles.location("web");
 
-        Spark.staticFiles.location("web");
+        // DAOs
+        InMemoryUserDAO userDAO = new InMemoryUserDAO();
+        InMemoryGameDAO gameDAO = new InMemoryGameDAO();
+        InMemoryAuthDAO authDAO = new InMemoryAuthDAO();
 
-        // Register your endpoints and handle exceptions here.
+        // Clear
+        ClearService clearService = new ClearService(userDAO, gameDAO, authDAO);
+        delete("/db", new ClearHandler(clearService));
 
-        //This line initializes the server and can be removed once you have a functioning endpoint 
-        Spark.init();
-// Initialize in-memory DAOs
-        var userDAO = new dataaccess.InMemoryUserDAO();
-        var gameDAO = new dataaccess.InMemoryGameDAO();
-        var authDAO = new dataaccess.InMemoryAuthDAO();
+        // Register
+        RegisterService registerService = new RegisterService(userDAO, authDAO);
+        post("/user", new RegisterHandler(registerService));
 
-// Set up the clear service and handler
-        var clearService = new service.ClearService(userDAO, gameDAO, authDAO);
-        var clearHandler = new server.ClearHandler(clearService);
+        // Login
+        LoginService loginService = new LoginService(userDAO, authDAO);
+        post("/session", new LoginHandler(loginService));
 
-// Register the HTTP DELETE /db endpoint
-        Spark.delete("/db", clearHandler);
+        // Logout
+        delete("/session", new LogoutHandler(authDAO));
 
-        Spark.awaitInitialization();
-        return Spark.port();
+        // Create Game
+        GameService gameService = new GameService(gameDAO);
+        post("/game", new CreateGameHandler(gameService));
+
+        // List Games
+        get("/game", new ListGamesHandler(gameService));
+
+        // Join Game
+        put("/game", new JoinGameHandler(gameService));
+
+        awaitInitialization();
+        return port();
     }
 
     public void stop() {
-        Spark.stop();
-        Spark.awaitStop();
+        // correct Spark shutdown
+        spark.Spark.stop();
     }
 }
+
+
+
