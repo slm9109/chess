@@ -9,7 +9,7 @@ import model.LoginRequest;
 import model.LoginResult;
 import dataaccess.DataAccessException;
 
-// import Gson, service.LoginService, model.LoginRequest, model.LoginResult, DataAccessException, spark.Route
+
 public class LoginHandler implements Route {
     private final LoginService loginService;
     private final Gson gson = new Gson();
@@ -33,6 +33,3 @@ public class LoginHandler implements Route {
 
     private record ErrorMessage(String message) {}
 }
-
-
-
